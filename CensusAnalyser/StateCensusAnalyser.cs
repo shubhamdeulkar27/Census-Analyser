@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CensusAnalyser
 {
-    class StateCensusAnalyser
+    public class StateCensusAnalyser
     {
         public static int ReadFile(string filePath, string delimiter)
         {
