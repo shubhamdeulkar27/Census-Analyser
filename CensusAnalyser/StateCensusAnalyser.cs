@@ -30,8 +30,8 @@ namespace CensusAnalyser
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_DELIMITER, "Invalid Delimiter");
 			}
 
-            List<T> list = CensusLoader<T>.LoadFile(filePath,delimiter);
-			return list.Count;
+            List<T> dataList = CensusLoader<T>.LoadFile(filePath,delimiter);
+			return dataList.Count;
 		}
 
 	}

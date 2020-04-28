@@ -14,7 +14,7 @@ namespace CensusAnalyser
 		public static List<T> LoadFile(string filePath, string delimiter)
 		{
 			//Genric Type List
-			List<T> list = new List<T>();
+			List<T> dataList = new List<T>();
 			StreamReader reader = new StreamReader(filePath);
 			string header = reader.ReadLine();
 			Type type = typeof(T);
@@ -38,7 +38,7 @@ namespace CensusAnalyser
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStateCensus cSVStateCensus = new BuilderCSV().SetCSVStateCensus(lineArray);
-					list.Add((T)Convert.ChangeType(cSVStateCensus, typeof(T)));
+					dataList.Add((T)Convert.ChangeType(cSVStateCensus, typeof(T)));
 				}
 			}
 			else if (type.Equals(typeof(CSVStates)))
@@ -58,10 +58,10 @@ namespace CensusAnalyser
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStates cSVStates = new BuilderCSV().SetCSVStates(lineArray);
-					list.Add((T)Convert.ChangeType(cSVStates, typeof(T)));
+					dataList.Add((T)Convert.ChangeType(cSVStates, typeof(T)));
 				}
 			}
-			return list;
+			return dataList;
 		}
 	}
 }
