@@ -160,5 +160,6 @@ namespace CensusAnalyserTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+
     }
 }
