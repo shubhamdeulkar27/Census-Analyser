@@ -106,5 +106,23 @@ namespace CensusAnalyserTest
             int records = StateCensusAnalyser.ReadStates(StateCodeFilePath, delimiter);
             Assert.AreEqual(expectedNoOFRecords, records);
         }
+
+        /// <summary>
+        /// Test Case 2.2 Given Invalid File Should Throw CesnsusAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenIncorrectStatCoDeFileShouldThrowCustomException()
+        {
+            string filepath = @"C:\Users\Shubham\source\repos\Census-Analyzer-Problem\AnyFileName.csv";
+            string expected = "Invalid File";
+            try
+            {
+                int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
