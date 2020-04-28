@@ -19,7 +19,7 @@ namespace CensusAnalyserTest
         public void GivenStateCensusDataFileShouldReturnValidRecords()
         {
             int expectedNoOFRecords = 29;
-            int records = StateCensusAnalyser.ReadFile(StateCensusFilePath, delimiter);
+            int records = StateCensusAnalyser.ReadStateCensus(StateCensusFilePath, delimiter);
             Assert.AreEqual(expectedNoOFRecords, records);
         }
 
@@ -33,7 +33,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\AnyFile.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadFile(filePath, delimiter);
+                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
             }
             catch (Exception exception)
             {
@@ -51,7 +51,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCensusData.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadFile(filePath, delimiter);
+                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
             }
             catch (Exception exception)
             {
@@ -69,7 +69,7 @@ namespace CensusAnalyserTest
             string custom_Delimiter = ";";
             try
             {
-                int records = StateCensusAnalyser.ReadFile(StateCensusFilePath,custom_Delimiter);
+                int records = StateCensusAnalyser.ReadStateCensus(StateCensusFilePath,custom_Delimiter);
             }
             catch (Exception exception)
             {
@@ -87,7 +87,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\CensusAnalyser\StateCensusData.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadFile(filePath, delimiter);
+                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
             }
             catch (Exception exception)
             {
