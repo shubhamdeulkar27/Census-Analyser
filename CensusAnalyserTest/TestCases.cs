@@ -124,5 +124,23 @@ namespace CensusAnalyserTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 2.3 Given Invalid Type File Should Throw CensusAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenInvalidFileTypeShouldThrowCensusAnalyssiException()
+        {
+            string filepath = @"C:\Users\Shubham\source\repos\Census-Analyzer-Problem\StateCode.txt";
+            string expected = "Invalid File Type";
+            try
+            {
+                int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
