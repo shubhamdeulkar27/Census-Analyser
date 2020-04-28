@@ -142,5 +142,23 @@ namespace CensusAnalyserTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 2.4 Given Invalid Delimiter should Throw CensusAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenInCorrectDelimiterShouldThrowCensusAnalysisException()
+        {
+            string custom_Delimiter = ";";
+            string expected = "Invalid Delimiter";
+            try
+            {
+                int records = StateCensusAnalyser.ReadStates(StateCodeFilePath, custom_Delimiter);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
