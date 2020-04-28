@@ -35,7 +35,14 @@ namespace CensusAnalyser
 			cSVStateCensus.Population = values[1];
 			cSVStateCensus.AreaInSqKm = values[2];
 			cSVStateCensus.DenisityPerSqKm = values[3];
+
+			//Throw CSVException if Field is set to null.
+			if (cSVStateCensus.State == null || cSVStateCensus.Population == null || cSVStateCensus.AreaInSqKm == null || cSVStateCensus.DenisityPerSqKm == null)
+			{
+				throw new CSVException(CSVException.ExceptionType.EMPTY_FEILD, "Entered Empty Field");
+			}
 			return cSVStateCensus;
+
 		}
 
 		/// <summary>
@@ -64,6 +71,12 @@ namespace CensusAnalyser
 			cSVStates.Name1 = values[2];
 			cSVStates.Tin1 = values[3];
 			cSVStates.StateCode1 = values[4];
+
+			//Throw CSVException if Field is set to null.
+			if (cSVStates.SrNo1 == null || cSVStates.State1 == null || cSVStates.Name1 == null || cSVStates.Tin1 == null || cSVStates.StateCode1 == null)
+			{
+				throw new CSVException(CSVException.ExceptionType.EMPTY_FEILD, "Entered Empty Field");
+			}
 			return cSVStates;
 		}	
 	}
