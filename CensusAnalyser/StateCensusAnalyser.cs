@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace CensusAnalyser
 {
@@ -10,13 +12,15 @@ namespace CensusAnalyser
 	/// </summary>
     public class StateCensusAnalyser<T>
     {
+		public static List<T> dataList = null;
+		
 		/// <summary>
 		/// ReadStateCensus Function Reads CSV File in List and returns List Count. 
 		/// </summary>
 		/// <param name="filePath"></param>
 		/// <param name="delimiter"></param>
 		/// <returns></returns>
-        public static int ReadFile(string filePath, string delimiter)
+		public static int ReadFile(string filePath, string delimiter)
         {
 			//IF File Type is invalid the throw CensusAnalysisException.
 			if (!filePath.Contains(".csv"))
@@ -30,9 +34,20 @@ namespace CensusAnalyser
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_DELIMITER, "Invalid Delimiter");
 			}
 
-            List<T> dataList = CensusLoader<T>.LoadFile(filePath,delimiter);
+            dataList = CensusLoader<T>.LoadFile(filePath,delimiter);
 			return dataList.Count;
 		}
 
+		/// <summary>
+		/// Function to sort the List of CSVStateCensus type and Convert it to Json Format. 
+		/// </summary>
+		/// <param name="dataList"></param>
+		/// <returns></returns>
+		public static string Sort(List<CSVStateCensus> dataList)
+		{
+			List<CSVStateCensus> sortedList = dataList.OrderBy(o => o.State).ToList();
+			string jsonStringObject = JsonSerializer.Serialize(sortedList);
+			return jsonStringObject;
+		}
 	}
 }

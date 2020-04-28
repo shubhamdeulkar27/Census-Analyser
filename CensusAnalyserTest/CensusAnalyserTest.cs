@@ -1,4 +1,5 @@
 using CensusAnalyser;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 
@@ -177,6 +178,24 @@ namespace CensusAnalyserTest
             {
                 Assert.AreEqual(expected, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Test Case To Check Json Formated Data Sorted Or Not.
+        /// </summary>
+        [Test]
+        public void GivenListShouldReturnSortedJsonFormat()
+        {
+            string expectedFirstState = "Andhra Pradesh";
+            string expectedLastState = "West Bengal";
+            int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath, delimiter);
+            var dataList = StateCensusAnalyser<CSVStateCensus>.dataList;
+            string sortedJson = StateCensusAnalyser<CSVStateCensus>.Sort(dataList);
+            var jArray = JArray.Parse(sortedJson);
+            string firstState = jArray[0]["State"].Value<string>();
+            string lastState = jArray[28]["State"].Value<string>();
+            Assert.AreEqual(expectedFirstState, firstState);
+            Assert.AreEqual(expectedLastState, lastState);
         }
     }
 }
