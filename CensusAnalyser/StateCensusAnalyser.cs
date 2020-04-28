@@ -9,6 +9,12 @@ namespace CensusAnalyser
     {
         public static int ReadFile(string filePath, string delimiter)
         {
+			//If File is Invalid then Throw CensusAnalysisException.
+			if (!filePath.Contains("StateCensusData"))
+			{
+				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.ENTERED_INVALID_FILES, "Invalid File");
+			}
+
             List<CSVStateCensus> list = new List<CSVStateCensus>();
             StreamReader reader = new StreamReader(filePath);
             string header = reader.ReadLine();
