@@ -161,5 +161,22 @@ namespace CensusAnalyserTest
             }
         }
 
+        /// <summary>
+        /// Test Case 2.5 Given File With Incorrecct Header Should throw CensusAnalysisException.
+        /// </summary>
+        [Test]
+        public void GivenFileWithIncorrectHeaderShouldThrowCensusAnalysisExcption()
+        {
+            string filepath = @"C:\Users\Shubham\source\repos\Census-Analyser\CensusAnalyser\StateCode.csv";
+            string expected = "Invalid Header";
+            try
+            {
+               int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
