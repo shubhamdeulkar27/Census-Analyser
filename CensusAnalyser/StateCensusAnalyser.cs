@@ -5,9 +5,18 @@ using System.Text;
 
 namespace CensusAnalyser
 {
+	/// <summary>
+	/// StateCensusAnalyser Class To Analyse The StateCensus Data.
+	/// </summary>
     public class StateCensusAnalyser
     {
-        public static int ReadFile(string filePath, string delimiter)
+		/// <summary>
+		/// ReadStateCensus Function Reads CSV File in List and returns List Count. 
+		/// </summary>
+		/// <param name="filePath"></param>
+		/// <param name="delimiter"></param>
+		/// <returns></returns>
+        public static int ReadStateCensus(string filePath, string delimiter)
         {
 			//If File is Invalid then Throw CensusAnalysisException.
 			if (!filePath.Contains("StateCensusData"))
@@ -26,10 +35,15 @@ namespace CensusAnalyser
 			{
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_DELIMITER, "Invalid Delimiter");
 			}
-
             List<CSVStateCensus> list = new List<CSVStateCensus>();
             StreamReader reader = new StreamReader(filePath);
             string header = reader.ReadLine();
+
+			//Throw Exception if File Header is Invalid.
+			if (!header.Contains("State") || !header.Contains("Population") || !header.Contains("AreaInSqKm") || !header.Contains("DensityPerSqKm"))
+			{
+				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_HEADER, "Invalid Header");
+			}
 			while (!reader.EndOfStream)
 			{
 				string line = reader.ReadLine();
