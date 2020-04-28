@@ -6,7 +6,9 @@ namespace CensusAnalyser
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To Census Analyser");
+            string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCensusData.csv";
+            int nummberOfRecords = StateCensusAnalyser.ReadFile(filePath,",");
+            Console.WriteLine($"Records are {nummberOfRecords}");
         }
     }
 }
