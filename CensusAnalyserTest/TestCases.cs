@@ -20,7 +20,7 @@ namespace CensusAnalyserTest
         {
             int expectedNoOFRecords = 29;
             int records = StateCensusAnalyser.ReadFile(StateCensusFilePath, delimiter);
-            Assert.AreEqual(expectedNoOFRecords,records);
+            Assert.AreEqual(expectedNoOFRecords, records);
         }
 
         /// <summary>
@@ -31,6 +31,24 @@ namespace CensusAnalyserTest
         {
             string expected = "Invalid File";
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\AnyFile.csv";
+            try
+            {
+                int records = StateCensusAnalyser.ReadFile(filePath, delimiter);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Test Case 1.3 Given Invalid File Type Should throw Exception.
+        /// </summary>
+        [Test]
+        public void GivenFileWithAnyTypeShouldThrowException()
+        {
+            string expected = "Invalid File Type";
+            string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCensusData.csv";
             try
             {
                 int records = StateCensusAnalyser.ReadFile(filePath, delimiter);

@@ -15,6 +15,12 @@ namespace CensusAnalyser
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.ENTERED_INVALID_FILES, "Invalid File");
 			}
 
+			//IF File Type is invalid the throw CensusAnalysisException.
+			if (!filePath.Contains(".csv"))
+			{
+				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_FILE_TYPE, "Invalid File Type");
+			}
+
             List<CSVStateCensus> list = new List<CSVStateCensus>();
             StreamReader reader = new StreamReader(filePath);
             string header = reader.ReadLine();
