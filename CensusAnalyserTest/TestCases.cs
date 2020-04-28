@@ -11,6 +11,7 @@ namespace CensusAnalyserTest
     {
         static string StateCensusFilePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCensusData.csv";
         static string delimiter = ",";
+        static string StateCodeFilePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCode.csv";
 
         /// <summary>
         /// Test Case 1.1 Ensuring the number Of Record Matches.
@@ -93,6 +94,17 @@ namespace CensusAnalyserTest
             {
                 Assert.AreEqual(expected, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Test Case 2.1 Ensuring the number Of Record Matches.
+        /// </summary>
+        [Test]
+        public void GivenStateCodeFileShouldReturnValidRecords()
+        {
+            int expectedNoOFRecords = 37;
+            int records = StateCensusAnalyser.ReadStates(StateCodeFilePath, delimiter);
+            Assert.AreEqual(expectedNoOFRecords, records);
         }
     }
 }
