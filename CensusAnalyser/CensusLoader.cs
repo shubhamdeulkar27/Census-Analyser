@@ -37,7 +37,7 @@ namespace CensusAnalyser
 				{
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
-					CSVStateCensus cSVStateCensus = BuilderCSV.SetCSVStateCensus(lineArray);
+					CSVStateCensus cSVStateCensus = new BuilderCSV().SetCSVStateCensus(lineArray);
 					list.Add((T)Convert.ChangeType(cSVStateCensus, typeof(T)));
 				}
 			}
@@ -57,7 +57,7 @@ namespace CensusAnalyser
 				{
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
-					CSVStates cSVStates = BuilderCSV.SetCSVStates(lineArray);
+					CSVStates cSVStates = new BuilderCSV().SetCSVStates(lineArray);
 					list.Add((T)Convert.ChangeType(cSVStates, typeof(T)));
 				}
 			}

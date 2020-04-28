@@ -7,7 +7,7 @@ namespace CensusAnalyser
 	/// <summary>
 	/// BuilderCSV Class to set the data to the respective CSV objects.
 	/// </summary>
-	public class BuilderCSV
+	public class BuilderCSV : IBuilderCSV
 	{
 		static string[] values;
 
@@ -16,7 +16,7 @@ namespace CensusAnalyser
 		/// </summary>
 		/// <param name="lineArray"></param>
 		/// <returns></returns>
-		public static CSVStateCensus SetCSVStateCensus(string[] lineArray)
+		public CSVStateCensus SetCSVStateCensus(string[] lineArray)
 		{
 			values = new string[]{ "", "", "", "" };
 			try
@@ -30,7 +30,7 @@ namespace CensusAnalyser
 			{
 				Console.WriteLine(exception.Message);
 			}
-			CSVStateCensus cSVStateCensus = FactoryCSV<CSVStateCensus>.CreateCSV();
+			CSVStateCensus cSVStateCensus = new FactoryCSV<CSVStateCensus>().CreateCSV();
 			cSVStateCensus.State = values[0];
 			cSVStateCensus.Population = values[1];
 			cSVStateCensus.AreaInSqKm = values[2];
@@ -43,7 +43,7 @@ namespace CensusAnalyser
 		/// </summary>
 		/// <param name="lineArray"></param>
 		/// <returns></returns>
-		public static CSVStates SetCSVStates(string[] lineArray)
+		public  CSVStates SetCSVStates(string[] lineArray)
 		{
 			values = new string[] { "", "", "", "", "" };
 			try
@@ -58,7 +58,7 @@ namespace CensusAnalyser
 			{
 				Console.WriteLine(exception.Message);
 			}
-			CSVStates cSVStates = FactoryCSV<CSVStates>.CreateCSV();
+			CSVStates cSVStates = new FactoryCSV<CSVStates>().CreateCSV();
 			cSVStates.SrNo1 = values[0];
 			cSVStates.State1 = values[1];
 			cSVStates.Name1 = values[2];
