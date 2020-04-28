@@ -19,7 +19,6 @@ namespace CensusAnalyser
 			string header = reader.ReadLine();
 			Type type = typeof(T);
 			string[] lineArray;
-			string[] values;
 
 			//Checks The Generic Type And Loads Respective File.
 			if (type.Equals(typeof(CSVStateCensus)))
@@ -38,23 +37,7 @@ namespace CensusAnalyser
 				{
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
-					values = new string[]{ "", "", "", "" };
-					try
-					{
-						values[0] = lineArray[0];
-						values[1] = lineArray[1];
-						values[2] = lineArray[2];
-						values[3] = lineArray[3];
-					}
-					catch (Exception exception)
-					{
-						Console.WriteLine(exception.Message);
-					}
-					CSVStateCensus cSVStateCensus = new CSVStateCensus();
-					cSVStateCensus.State = values[0];
-					cSVStateCensus.Population = values[1];
-					cSVStateCensus.AreaInSqKm = values[2];
-					cSVStateCensus.DenisityPerSqKm = values[3];
+					CSVStateCensus cSVStateCensus = BuilderCSV.SetCSVStateCensus(lineArray);
 					list.Add((T)Convert.ChangeType(cSVStateCensus, typeof(T)));
 				}
 			}
@@ -74,25 +57,7 @@ namespace CensusAnalyser
 				{
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
-					values = new string[]{ "", "", "", "", "" };
-					try
-					{
-						values[0] = lineArray[0];
-						values[1] = lineArray[1];
-						values[2] = lineArray[2];
-						values[3] = lineArray[3];
-						values[4] = lineArray[4];
-					}
-					catch (Exception exception)
-					{
-						Console.WriteLine(exception.Message);
-					}
-					CSVStates cSVStates = new CSVStates();
-					cSVStates.SrNo1 = values[0];
-					cSVStates.State1 = values[1];
-					cSVStates.Name1 = values[2];
-					cSVStates.Tin1 = values[3];
-					cSVStates.StateCode1 = values[4];
+					CSVStates cSVStates = BuilderCSV.SetCSVStates(lineArray);
 					list.Add((T)Convert.ChangeType(cSVStates, typeof(T)));
 				}
 			}
