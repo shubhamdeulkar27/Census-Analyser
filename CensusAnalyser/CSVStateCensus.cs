@@ -7,7 +7,7 @@ namespace CensusAnalyser
     /// <summary>
     /// POCO Class for StateCensusData File.
     /// </summary>
-    class CSVStateCensus
+    public class CSVStateCensus
     {
         //Variables.
         private string state;

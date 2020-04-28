@@ -20,7 +20,7 @@ namespace CensusAnalyserTest
         public void GivenStateCensusDataFileShouldReturnValidRecords()
         {
             int expectedNoOFRecords = 29;
-            int records = StateCensusAnalyser.ReadStateCensus(StateCensusFilePath, delimiter);
+            int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath, delimiter);
             Assert.AreEqual(expectedNoOFRecords, records);
         }
 
@@ -31,10 +31,10 @@ namespace CensusAnalyserTest
         public void GivenInvalidFileShouldThrowException()
         {
             string expected = "Invalid File";
-            string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\AnyFile.csv";
+            string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCode.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
+                int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(filePath, delimiter);
             }
             catch (Exception exception)
             {
@@ -52,7 +52,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCensusData.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
+                int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(filePath, delimiter);
             }
             catch (Exception exception)
             {
@@ -70,7 +70,7 @@ namespace CensusAnalyserTest
             string custom_Delimiter = ";";
             try
             {
-                int records = StateCensusAnalyser.ReadStateCensus(StateCensusFilePath,custom_Delimiter);
+                int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath,custom_Delimiter);
             }
             catch (Exception exception)
             {
@@ -88,7 +88,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\CensusAnalyser\StateCensusData.csv";
             try
             {
-                int records = StateCensusAnalyser.ReadStateCensus(filePath, delimiter);
+                int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(filePath, delimiter);
             }
             catch (Exception exception)
             {
@@ -103,7 +103,7 @@ namespace CensusAnalyserTest
         public void GivenStateCodeFileShouldReturnValidRecords()
         {
             int expectedNoOFRecords = 37;
-            int records = StateCensusAnalyser.ReadStates(StateCodeFilePath, delimiter);
+            int records = StateCensusAnalyser<CSVStates>.ReadFile(StateCodeFilePath, delimiter);
             Assert.AreEqual(expectedNoOFRecords, records);
         }
 
@@ -113,11 +113,11 @@ namespace CensusAnalyserTest
         [Test]
         public void GivenIncorrectStatCoDeFileShouldThrowCustomException()
         {
-            string filepath = @"C:\Users\Shubham\source\repos\Census-Analyzer-Problem\AnyFileName.csv";
+            string filepath = @"C:\Users\Shubham\source\repos\Census-Analyzer-Problem\StateCensusData.csv";
             string expected = "Invalid File";
             try
             {
-                int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+                int records = StateCensusAnalyser<CSVStates>.ReadFile(filepath, delimiter);
             }
             catch (Exception exception)
             {
@@ -135,7 +135,7 @@ namespace CensusAnalyserTest
             string expected = "Invalid File Type";
             try
             {
-                int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+                int records = StateCensusAnalyser<CSVStates>.ReadFile(filepath, delimiter);
             }
             catch (Exception exception)
             {
@@ -153,7 +153,7 @@ namespace CensusAnalyserTest
             string expected = "Invalid Delimiter";
             try
             {
-                int records = StateCensusAnalyser.ReadStates(StateCodeFilePath, custom_Delimiter);
+                int records = StateCensusAnalyser<CSVStates>.ReadFile(StateCodeFilePath, custom_Delimiter);
             }
             catch (Exception exception)
             {
@@ -171,7 +171,7 @@ namespace CensusAnalyserTest
             string expected = "Invalid Header";
             try
             {
-               int records = StateCensusAnalyser.ReadStates(filepath, delimiter);
+               int records = StateCensusAnalyser<CSVStates>.ReadFile(filepath, delimiter);
             }
             catch (Exception exception)
             {
