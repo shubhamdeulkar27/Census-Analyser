@@ -21,6 +21,12 @@ namespace CensusAnalyser
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_FILE_TYPE, "Invalid File Type");
 			}
 
+			//If Delimiter is Invalid Then Throw CensusAnalysisException.
+			if (!delimiter.Contains(","))
+			{
+				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_DELIMITER, "Invalid Delimiter");
+			}
+
             List<CSVStateCensus> list = new List<CSVStateCensus>();
             StreamReader reader = new StreamReader(filePath);
             string header = reader.ReadLine();
