@@ -11,14 +11,15 @@ namespace CensusAnalyser
 	/// <typeparam name="T"></typeparam>
 	class CensusLoader<T>
 	{
-		public static List<T> LoadFile(string filePath, string delimiter)
+		public static Dictionary<int,T> LoadFile(string filePath, string delimiter)
 		{
 			//Genric Type List
-			List<T> dataList = new List<T>();
+			Dictionary<int, T> dataDictionary = new Dictionary<int, T>();
 			StreamReader reader = new StreamReader(filePath);
 			string header = reader.ReadLine();
 			Type type = typeof(T);
 			string[] lineArray;
+			int counter = 0;
 
 			//Checks The Generic Type And Loads Respective File.
 			if (type.Equals(typeof(CSVStateCensus)))
@@ -38,7 +39,7 @@ namespace CensusAnalyser
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStateCensus cSVStateCensus = new BuilderCSV().SetCSVStateCensus(lineArray);
-					dataList.Add((T)Convert.ChangeType(cSVStateCensus, typeof(T)));
+					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStateCensus, typeof(T)));
 				}
 			}
 			else if (type.Equals(typeof(CSVStates)))
@@ -58,10 +59,10 @@ namespace CensusAnalyser
 					string line = reader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStates cSVStates = new BuilderCSV().SetCSVStates(lineArray);
-					dataList.Add((T)Convert.ChangeType(cSVStates, typeof(T)));
+					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStates, typeof(T)));
 				}
 			}
-			return dataList;
+			return dataDictionary;
 		}
 	}
 }

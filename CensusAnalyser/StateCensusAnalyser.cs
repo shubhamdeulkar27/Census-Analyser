@@ -12,7 +12,7 @@ namespace CensusAnalyser
 	/// </summary>
     public class StateCensusAnalyser<T>
     {
-		public static List<T> dataList = null;
+		public static Dictionary<int,T> dataDictionary = null;
 		
 		/// <summary>
 		/// ReadStateCensus Function Reads CSV File in List and returns List Count. 
@@ -34,8 +34,8 @@ namespace CensusAnalyser
 				throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_DELIMITER, "Invalid Delimiter");
 			}
 
-            dataList = CensusLoader<T>.LoadFile(filePath,delimiter);
-			return dataList.Count;
+            dataDictionary = CensusLoader<T>.LoadFile(filePath,delimiter);
+			return dataDictionary.Count;
 		}
 
 		/// <summary>
@@ -43,10 +43,10 @@ namespace CensusAnalyser
 		/// </summary>
 		/// <param name="dataList"></param>
 		/// <returns></returns>
-		public static string SortCSVStateCensusByState(List<CSVStateCensus> dataList)
+		public static string SortCSVStateCensusByState(Dictionary<int,CSVStateCensus> dataDictionary)
 		{
-			List<CSVStateCensus> sortedList = dataList.OrderBy(o => o.State).ToList();
-			string jsonStringObject = JsonSerializer.Serialize(sortedList);
+			var sortedDictionary = from entry in dataDictionary orderby entry.Value.State ascending select entry;
+			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
 			return jsonStringObject;
 		}
 
@@ -55,10 +55,10 @@ namespace CensusAnalyser
 		/// </summary>
 		/// <param name="dataList"></param>
 		/// <returns></returns>
-		public static string SortCSVStatesByCode(List<CSVStates> dataList)
+		public static string SortCSVStatesByCode(Dictionary<int,CSVStates> dataDictionary)
 		{
-			List<CSVStates> sortedList = dataList.OrderBy(o => o.StateCode1).ToList();
-			string jsonStringObject = JsonSerializer.Serialize(sortedList);
+			var sortedDictionary = from entry in dataDictionary orderby entry.Value.StateCode1 ascending select entry;
+			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
 			return jsonStringObject;
 		}
 	}

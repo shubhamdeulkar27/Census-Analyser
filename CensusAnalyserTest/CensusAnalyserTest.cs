@@ -189,11 +189,11 @@ namespace CensusAnalyserTest
             string expectedFirstState = "Andhra Pradesh";
             string expectedLastState = "West Bengal";
             int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath, delimiter);
-            var dataList = StateCensusAnalyser<CSVStateCensus>.dataList;
-            string sortedJson = StateCensusAnalyser<CSVStateCensus>.SortCSVStateCensusByState(dataList);
+            var dataDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
+            string sortedJson = StateCensusAnalyser<CSVStateCensus>.SortCSVStateCensusByState(dataDictionary);
             var jArray = JArray.Parse(sortedJson);
-            string firstState = jArray[0]["State"].Value<string>();
-            string lastState = jArray[28]["State"].Value<string>();
+            string firstState = jArray[0]["Value"]["State"].Value<string>();
+            string lastState = jArray[28]["Value"]["State"].Value<string>();
             Assert.AreEqual(expectedFirstState, firstState);
             Assert.AreEqual(expectedLastState, lastState);
         }
@@ -207,11 +207,11 @@ namespace CensusAnalyserTest
             string expectedFirstState = "Andaman and Nicobar Islands";
             string expectedLastState = "West Bengal";
             int records = StateCensusAnalyser<CSVStates>.ReadFile(StateCodeFilePath, delimiter);
-            var dataList = StateCensusAnalyser<CSVStates>.dataList;
-            string sortedJson = StateCensusAnalyser<CSVStates>.SortCSVStatesByCode(dataList);
+            var dataDictionary = StateCensusAnalyser<CSVStates>.dataDictionary;
+            string sortedJson = StateCensusAnalyser<CSVStates>.SortCSVStatesByCode(dataDictionary);
             var jArray = JArray.Parse(sortedJson);
-            string firstState = jArray[0]["State1"].Value<string>();
-            string lastState = jArray[36]["State1"].Value<string>();
+            string firstState = jArray[0]["Value"]["State1"].Value<string>();
+            string lastState = jArray[36]["Value"]["State1"].Value<string>();
             Assert.AreEqual(expectedFirstState, firstState);
             Assert.AreEqual(expectedLastState, lastState);
         }
