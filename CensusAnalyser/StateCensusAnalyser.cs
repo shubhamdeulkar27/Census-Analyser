@@ -74,5 +74,18 @@ namespace CensusAnalyser
 			File.WriteAllText(path + "Output.json", jsonStringObject);
 			return jsonStringObject;
 		}
+
+		/// <summary>
+		/// Function to sort the Dictionary(Map) of CSVStateCensus type in High to Low Population Density Order and Convert it to Json Format.
+		/// </summary>
+		/// <param name="dictionary"></param>
+		/// <returns></returns>
+		public static string SortCSVStateCensusByPopulationDensity(Dictionary<int, CSVStateCensus> dictionary, string path)
+		{
+			var sortedDictionary = from entry in dictionary orderby Int32.Parse(entry.Value.DenisityPerSqKm) descending select entry;
+			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
+			File.WriteAllText(path + "StateCensusByPopulationDensity.json", jsonStringObject);
+			return jsonStringObject;
+		}
 	}
 }
