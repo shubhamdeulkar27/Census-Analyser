@@ -15,8 +15,8 @@ namespace CensusAnalyser
 		{
 			//Genric Type List
 			Dictionary<int, T> dataDictionary = new Dictionary<int, T>();
-			StreamReader reader = new StreamReader(filePath);
-			string header = reader.ReadLine();
+			StreamReader streamReader = new StreamReader(filePath);
+			string header = streamReader.ReadLine();
 			Type type = typeof(T);
 			string[] lineArray;
 			int counter = 0;
@@ -34,9 +34,9 @@ namespace CensusAnalyser
 				{
 					throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_HEADER, "Invalid Header");
 				}
-				while (!reader.EndOfStream)
+				while (!streamReader.EndOfStream)
 				{
-					string line = reader.ReadLine();
+					string line = streamReader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStateCensus cSVStateCensus = new BuilderCSV().SetCSVStateCensus(lineArray);
 					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStateCensus, typeof(T)));
@@ -54,9 +54,9 @@ namespace CensusAnalyser
 				{
 					throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_HEADER, "Invalid Header");
 				}
-				while (!reader.EndOfStream)
+				while (!streamReader.EndOfStream)
 				{
-					string line = reader.ReadLine();
+					string line = streamReader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStates cSVStates = new BuilderCSV().SetCSVStates(lineArray);
 					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStates, typeof(T)));
