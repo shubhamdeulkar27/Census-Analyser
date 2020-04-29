@@ -190,10 +190,28 @@ namespace CensusAnalyserTest
             string expectedLastState = "West Bengal";
             int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath, delimiter);
             var dataList = StateCensusAnalyser<CSVStateCensus>.dataList;
-            string sortedJson = StateCensusAnalyser<CSVStateCensus>.Sort(dataList);
+            string sortedJson = StateCensusAnalyser<CSVStateCensus>.SortCSVStateCensusByState(dataList);
             var jArray = JArray.Parse(sortedJson);
             string firstState = jArray[0]["State"].Value<string>();
             string lastState = jArray[28]["State"].Value<string>();
+            Assert.AreEqual(expectedFirstState, firstState);
+            Assert.AreEqual(expectedLastState, lastState);
+        }
+
+        /// <summary>
+        ///Test Case Checks if json formated CSVStates data is sorted or not.
+        /// </summary>
+        [Test]
+        public void SortAndJsonTestCSVStates()
+        {
+            string expectedFirstState = "Andaman and Nicobar Islands";
+            string expectedLastState = "West Bengal";
+            int records = StateCensusAnalyser<CSVStates>.ReadFile(StateCodeFilePath, delimiter);
+            var dataList = StateCensusAnalyser<CSVStates>.dataList;
+            string sortedJson = StateCensusAnalyser<CSVStates>.SortCSVStatesByCode(dataList);
+            var jArray = JArray.Parse(sortedJson);
+            string firstState = jArray[0]["State1"].Value<string>();
+            string lastState = jArray[36]["State1"].Value<string>();
             Assert.AreEqual(expectedFirstState, firstState);
             Assert.AreEqual(expectedLastState, lastState);
         }

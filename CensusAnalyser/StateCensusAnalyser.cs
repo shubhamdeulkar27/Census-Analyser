@@ -43,9 +43,21 @@ namespace CensusAnalyser
 		/// </summary>
 		/// <param name="dataList"></param>
 		/// <returns></returns>
-		public static string Sort(List<CSVStateCensus> dataList)
+		public static string SortCSVStateCensusByState(List<CSVStateCensus> dataList)
 		{
 			List<CSVStateCensus> sortedList = dataList.OrderBy(o => o.State).ToList();
+			string jsonStringObject = JsonSerializer.Serialize(sortedList);
+			return jsonStringObject;
+		}
+
+		/// <summary>
+		/// Function to sort the List of CSVStates type and Convert it to Json Format.
+		/// </summary>
+		/// <param name="dataList"></param>
+		/// <returns></returns>
+		public static string SortCSVStatesByCode(List<CSVStates> dataList)
+		{
+			List<CSVStates> sortedList = dataList.OrderBy(o => o.StateCode1).ToList();
 			string jsonStringObject = JsonSerializer.Serialize(sortedList);
 			return jsonStringObject;
 		}
