@@ -37,11 +37,11 @@ namespace CensusAnalyser
             dataDictionary = CensusLoader<T>.LoadFile(filePath,delimiter);
 			return dataDictionary.Count;
 		}
-		
+
 		/// <summary>
-		/// Function to sort the List of CSVStateCensus type and Convert it to Json Format. 
+		/// Function to sort the List of CSVStateCensus type and Convert it to Json Format.
 		/// </summary>
-		/// <param name="dataList"></param>
+		/// <param name="dataDictionary"></param>
 		/// <returns></returns>
 		public static string SortCSVStateCensusByState(Dictionary<int,CSVStateCensus> dataDictionary)
 		{
@@ -53,7 +53,7 @@ namespace CensusAnalyser
 		/// <summary>
 		/// Function to sort the List of CSVStates type and Convert it to Json Format.
 		/// </summary>
-		/// <param name="dataList"></param>
+		/// <param name="dataDictionary"></param>
 		/// <returns></returns>
 		public static string SortCSVStatesByCode(Dictionary<int,CSVStates> dataDictionary)
 		{
@@ -66,6 +66,7 @@ namespace CensusAnalyser
 		/// Function to sort the Dictionary(Map) of CSVStateCensus type in High to Low Population Order and Convert it to Json Format.
 		/// </summary>
 		/// <param name="dictionary"></param>
+		/// <param name="path"></param>
 		/// <returns></returns>
 		public static string SortCSVStateCensusByPopulation(Dictionary<int, CSVStateCensus> dictionary,string path)
 		{
@@ -79,12 +80,27 @@ namespace CensusAnalyser
 		/// Function to sort the Dictionary(Map) of CSVStateCensus type in High to Low Population Density Order and Convert it to Json Format.
 		/// </summary>
 		/// <param name="dictionary"></param>
+		/// <param name="path"></param>
 		/// <returns></returns>
 		public static string SortCSVStateCensusByPopulationDensity(Dictionary<int, CSVStateCensus> dictionary, string path)
 		{
 			var sortedDictionary = from entry in dictionary orderby Int32.Parse(entry.Value.DenisityPerSqKm) descending select entry;
 			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
 			File.WriteAllText(path + "StateCensusByPopulationDensity.json", jsonStringObject);
+			return jsonStringObject;
+		}
+
+		/// <summary>
+		/// Function to sort the Dictionary(Map) of CSVStateCensus type in Large to Small Area Order and Convert it to Json Format.
+		/// </summary>
+		/// <param name="dictionary"></param>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		public static string SortCSVStateCensusByArea(Dictionary<int, CSVStateCensus> dictionary, string path)
+		{
+			var sortedDictionary = from entry in dictionary orderby Int32.Parse(entry.Value.AreaInSqKm) descending select entry;
+			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
+			File.WriteAllText(path + "StateCensusByArea.json", jsonStringObject);
 			return jsonStringObject;
 		}
 	}
