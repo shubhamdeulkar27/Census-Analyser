@@ -236,5 +236,24 @@ namespace CensusAnalyserTest
             Assert.AreEqual(expectedStateCensusFirstState, stateCensusFirstState);
             Assert.AreEqual(expectedStateCensusLastState, stateCensusLastState);
         }
+
+        /// <summary>
+        /// Test Case to check if Json formated CSVStateCensus Data is in Population High To Low Order.
+        /// </summary>
+        [Test]
+        public void SortByStateAndJsonTestCSVStateCensus()
+        {
+            string path = @"C:\Users\Shubham\source\repos\Census-Analyser\CensusAnalyser\Files\";
+            string expectedFirstState = "Uttar Pradesh";
+            string expectedLastState = "Sikkim";
+            int records = StateCensusAnalyser<CSVStateCensus>.ReadFile(StateCensusFilePath, delimiter);
+            var stateCensusDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
+            string sortedJson = StateCensusAnalyser<CSVStateCensus>.SortCSVStateCensusByPopulation(stateCensusDictionary,path);
+            var jsonArray = JArray.Parse(sortedJson);
+            string firstState = jsonArray[0]["Value"]["State"].Value<string>();
+            string lastState = jsonArray[jsonArray.Count - 1]["Value"]["State"].Value<string>();
+            Assert.AreEqual(expectedFirstState, firstState);
+            Assert.AreEqual(expectedLastState, lastState);
+        }
     }
 }
