@@ -22,5 +22,12 @@ namespace CensusAnalyser
         /// <param name="lineArray"></param>
         /// <returns></returns>
         public abstract CSVStates SetCSVStates(string[] lineArray);
+
+        /// <summary>
+        /// Abstract SetCSVUSCencus Function.
+        /// </summary>
+        /// <param name="lineArray"></param>
+        /// <returns></returns>
+        public abstract CSVUSCensus SetCSVUSCensus(string[] lineArray);
     }
 }

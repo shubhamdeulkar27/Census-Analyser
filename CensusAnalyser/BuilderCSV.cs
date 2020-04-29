@@ -75,6 +75,37 @@ namespace CensusAnalyser
 				throw new CSVException(CSVException.ExceptionType.EMPTY_FEILD, "Entered Empty Field");
 			}
 			return cSVStates;
-		}	
+		}
+
+
+		public CSVUSCensus SetCSVUSCensus(string[] lineArray)
+		{
+			values = new string[] { "", "", "", "", "", "", "", "", "" };
+			try
+			{
+				values[0] = lineArray[0];
+				values[1] = lineArray[1];
+				values[2] = lineArray[2];
+				values[3] = lineArray[3];
+				values[4] = lineArray[4];
+				values[5] = lineArray[5];
+				values[6] = lineArray[6];
+				values[7] = lineArray[7];
+				values[8] = lineArray[8];
+			}
+			catch (Exception exception)
+			{
+				Console.WriteLine(exception.Message);
+			}
+			CSVUSCensus cSVUSCensus = new FactoryCSV<CSVUSCensus>().CreateCSV();
+			cSVUSCensus = new CensusDAO(cSVUSCensus, values).GetCSVUSCensus();
+
+			//Throw CSVException if Field is set to null.
+			if (cSVUSCensus.State_Id1 == null || cSVUSCensus.State1 == null || cSVUSCensus.Population1 == null || cSVUSCensus.Total_Area1 == null  || cSVUSCensus.Population_Density1 == null)
+			{
+				throw new CSVException(CSVException.ExceptionType.EMPTY_FEILD, "Entered Empty Field");
+			}
+			return cSVUSCensus;
+		}
 	}
 }

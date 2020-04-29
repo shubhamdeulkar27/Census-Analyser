@@ -39,7 +39,7 @@ namespace CensusAnalyser
 					string line = streamReader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStateCensus cSVStateCensus = new BuilderCSV().SetCSVStateCensus(lineArray);
-					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStateCensus, typeof(T)));
+					dataDictionary.Add(++counter, (T)Convert.ChangeType(cSVStateCensus, typeof(T)));
 				}
 			}
 			else if (type.Equals(typeof(CSVStates)))
@@ -59,7 +59,27 @@ namespace CensusAnalyser
 					string line = streamReader.ReadLine();
 					lineArray = line.Split(delimiter);
 					CSVStates cSVStates = new BuilderCSV().SetCSVStates(lineArray);
-					dataDictionary.Add(counter++,(T)Convert.ChangeType(cSVStates, typeof(T)));
+					dataDictionary.Add(++counter, (T)Convert.ChangeType(cSVStates, typeof(T)));
+				}
+			}
+			else if (type.Equals(typeof(CSVUSCensus)))
+			{
+				//If File is Invalid then Throw CensusAnalysisException.
+				if (!filePath.Contains("USCensusData"))
+				{
+					throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.ENTERED_INVALID_FILES, "Invalid File");
+				}
+				//Throw Exception if File Header is Invalid.
+				if (!header.Contains("State Id") || !header.Contains("State") || !header.Contains("Population") || !header.Contains("Housing units") || !header.Contains("Total area") || !header.Contains("Water area") || !header.Contains("Land area") || !header.Contains("Population Density") || !header.Contains("Housing Density"))
+				{
+					throw new CensusAnalysisException(CensusAnalysisException.ExceptionType.INVALID_HEADER, "Invalid Header");
+				}
+				while (!streamReader.EndOfStream)
+				{
+					string line = streamReader.ReadLine();
+					lineArray = line.Split(delimiter);
+					CSVUSCensus cSVUSCensus = new BuilderCSV().SetCSVUSCensus(lineArray);
+					dataDictionary.Add(++counter, (T)Convert.ChangeType(cSVUSCensus, typeof(T)));
 				}
 			}
 			return dataDictionary;
