@@ -31,10 +31,7 @@ namespace CensusAnalyser
 				Console.WriteLine(exception.Message);
 			}
 			CSVStateCensus cSVStateCensus = new FactoryCSV<CSVStateCensus>().CreateCSV();
-			cSVStateCensus.State = values[0];
-			cSVStateCensus.Population = values[1];
-			cSVStateCensus.AreaInSqKm = values[2];
-			cSVStateCensus.DenisityPerSqKm = values[3];
+			cSVStateCensus = new CensusDAO(cSVStateCensus,values).GetCSVStateCensus();
 
 			//Throw CSVException if Field is set to null.
 			if (cSVStateCensus.State == null || cSVStateCensus.Population == null || cSVStateCensus.AreaInSqKm == null || cSVStateCensus.DenisityPerSqKm == null)

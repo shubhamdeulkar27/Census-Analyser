@@ -15,6 +15,16 @@ namespace CensusAnalyser
         private string areaInSqKm;
         private string denisityPerSqKm;
 
+        public CSVStateCensus() { } 
+
+        public CSVStateCensus(string state, string poplation, string populationDensity, string totalArea)
+        {
+            this.state = state;
+            this.population = poplation;
+            this.denisityPerSqKm = populationDensity;
+            this.areaInSqKm = totalArea;
+        }
+
         /// <summary>
         /// Setters And Getters.
         /// </summary>
