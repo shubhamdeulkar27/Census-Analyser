@@ -54,12 +54,15 @@ namespace CensusAnalyser
         }
 
         /// <summary>
-        /// Function TO Return CSVUSCensus Instance.
+        /// Function to Return Respective Instances.
         /// </summary>
+        /// <param name="country"></param>
         /// <returns></returns>
-        public CSVUSCensus GetCSVUSCensus()
+        public object GetCensusDTO(AdapterCensusLoader<CensusDAO>.Country country)
         {
-            return new CSVUSCensus(state, stateCode, population, populationDensity,totalArea);
+            if (country.Equals(AdapterCensusLoader<CensusDAO>.Country.US))
+                return new CSVUSCensus(state, stateCode, population, populationDensity, totalArea);
+            return new CSVStateCensus(state, population, populationDensity, totalArea);
         }
     }
 }

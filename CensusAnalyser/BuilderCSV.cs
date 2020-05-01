@@ -31,7 +31,7 @@ namespace CensusAnalyser
 				Console.WriteLine(exception.Message);
 			}
 			CSVStateCensus cSVStateCensus = new FactoryCSV<CSVStateCensus>().CreateCSV();
-			cSVStateCensus = new CensusDAO(cSVStateCensus,values).GetCSVStateCensus();
+			cSVStateCensus = (CSVStateCensus)Convert.ChangeType(new CensusDAO(cSVStateCensus,values).GetCensusDTO(AdapterCensusLoader<CensusDAO>.Country.INDIA),typeof(CSVStateCensus));
 
 			//Throw CSVException if Field is set to null.
 			if (cSVStateCensus.State == null || cSVStateCensus.Population == null || cSVStateCensus.AreaInSqKm == null || cSVStateCensus.DenisityPerSqKm == null)
@@ -98,7 +98,7 @@ namespace CensusAnalyser
 				Console.WriteLine(exception.Message);
 			}
 			CSVUSCensus cSVUSCensus = new FactoryCSV<CSVUSCensus>().CreateCSV();
-			cSVUSCensus = new CensusDAO(cSVUSCensus, values).GetCSVUSCensus();
+			cSVUSCensus = (CSVUSCensus)Convert.ChangeType(new CensusDAO(cSVUSCensus, values).GetCensusDTO(CensusLoader<CensusDAO>.Country.US),typeof(CSVUSCensus));
 
 			//Throw CSVException if Field is set to null.
 			if (cSVUSCensus.State_Id1 == null || cSVUSCensus.State1 == null || cSVUSCensus.Population1 == null || cSVUSCensus.Total_Area1 == null  || cSVUSCensus.Population_Density1 == null)
