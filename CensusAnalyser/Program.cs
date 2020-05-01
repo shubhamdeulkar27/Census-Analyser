@@ -32,7 +32,7 @@ namespace CensusAnalyser
             }
 
             //Sorting CSVUSCensus Data and Converting To JSOn.
-            string usCensusJson = new StateCensusAnalyser<CSVUSCensus>().SortCSVUSCensusByPopulation(usDataDictionary);
+            string usCensusJson = new StateCensusAnalyser<CSVUSCensus>().SortCSVUSCensus(usDataDictionary,"Population");
             Console.WriteLine(usCensusJson);
         }
     }
