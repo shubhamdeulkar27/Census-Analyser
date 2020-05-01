@@ -84,5 +84,17 @@ namespace CensusAnalyser
 			}
 			return jsonStringObject;
 		}
+
+		/// <summary>
+		/// Function to sort USCensus Data By Population Order And Return in JSON format.
+		/// </summary>
+		/// <param name="dictionary"></param>
+		/// <returns></returns>
+		public string SortCSVUSCensusByPopulation(Dictionary<int, CSVUSCensus> dictionary)
+		{
+			var sortedDictionary = from entry in dictionary orderby Int32.Parse(entry.Value.Population1) descending select entry;
+			string jsonStringObject = JsonSerializer.Serialize(sortedDictionary);
+			return jsonStringObject;
+		}
 	}
 }

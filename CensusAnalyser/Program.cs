@@ -17,6 +17,11 @@ namespace CensusAnalyser
             int numberOfRecords2 = new StateCensusAnalyser<CSVStates>().ReadFile(CensusLoader<CSVStates>.Country.INDIA, ",", StateCodeFilePath);
             Console.WriteLine($"StateCode Records are {numberOfRecords2}");
             
+            //Sorting CSVStateCensus Data and Converting to JSON.
+            Dictionary<int, CSVStateCensus> dataDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
+            string json = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(dataDictionary,"State",true);
+            Console.WriteLine(json); 
+            
             //Loading UCCensusData.
             string USCensusFilePath = @"C:\Users\Shubham\source\repos\Census-Analyser\USCensusData.csv";
             int numberOfRecords3 = new StateCensusAnalyser<CSVUSCensus>().ReadFile(CensusLoader<CSVUSCensus>.Country.US, ",", USCensusFilePath);
@@ -26,10 +31,9 @@ namespace CensusAnalyser
                 Console.WriteLine($"{pair.Key} : {pair.Value.State_Id1} : {pair.Value.State1} : {pair.Value.Total_Area1} : {pair.Value.Population1} : {pair.Value.Population_Density1}");
             }
 
-            //Sorting Function.
-            Dictionary<int, CSVStateCensus> dataDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
-            string json = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(dataDictionary,"State",true);
-            Console.WriteLine(json);
+            //Sorting CSVUSCensus Data and Converting To JSOn.
+            string usCensusJson = new StateCensusAnalyser<CSVUSCensus>().SortCSVUSCensusByPopulation(usDataDictionary);
+            Console.WriteLine(usCensusJson);
         }
     }
 }
