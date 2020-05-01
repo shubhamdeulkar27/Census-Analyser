@@ -18,7 +18,7 @@ namespace CensusAnalyser
 		/// <returns></returns>
 		public CSVStateCensus SetCSVStateCensus(string[] lineArray)
 		{
-			values = new string[]{ "", "", "", "" };
+			values = new string[]{ "", "0", "0", "0" };
 			try
 			{
 				values[0] = lineArray[0];
