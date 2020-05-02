@@ -35,7 +35,7 @@ namespace CensusAnalyserTest
             string filePath = @"C:\Users\Shubham\source\repos\Census-Analyser\StateCode.csv";
             try
             {
-                int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter,filePath);
+                int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter, filePath);
             }
             catch (Exception exception)
             {
@@ -71,7 +71,7 @@ namespace CensusAnalyserTest
             string custom_Delimiter = ";";
             try
             {
-                int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA,custom_Delimiter, StateCensusFilePath);
+                int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, custom_Delimiter, StateCensusFilePath);
             }
             catch (Exception exception)
             {
@@ -179,7 +179,7 @@ namespace CensusAnalyserTest
             string expected = "Invalid Header";
             try
             {
-               int stateCodeRecords = new StateCensusAnalyser<CSVStates>().ReadFile(CensusLoader<CSVStates>.Country.INDIA, delimiter, filepath1);
+                int stateCodeRecords = new StateCensusAnalyser<CSVStates>().ReadFile(CensusLoader<CSVStates>.Country.INDIA, delimiter, filepath1);
                 int stateCensusRecords = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter, filepath2);
             }
             catch (Exception exception)
@@ -198,7 +198,7 @@ namespace CensusAnalyserTest
             string expectedLastState = "West Bengal";
             int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter, StateCensusFilePath);
             var dataDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
-            string sortedJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(dataDictionary,"State",false);
+            string sortedJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(dataDictionary, "State", false);
             var jArray = JArray.Parse(sortedJson);
             string firstState = jArray[0]["Value"]["State"].Value<string>();
             string lastState = jArray[28]["Value"]["State"].Value<string>();
@@ -220,7 +220,7 @@ namespace CensusAnalyserTest
             string sortedStateCodeJson = new StateCensusAnalyser<CSVStates>().SortCSVStatesByCode(stateCodeDictionary);
             var jArray1 = JArray.Parse(sortedStateCodeJson);
             string stateCodeFirstState = jArray1[0]["Value"]["State1"].Value<string>();
-            string stateCodeLastState = jArray1[jArray1.Count-1]["Value"]["State1"].Value<string>();
+            string stateCodeLastState = jArray1[jArray1.Count - 1]["Value"]["State1"].Value<string>();
             Assert.AreEqual(expectedStateCodeFirstState, stateCodeFirstState);
             Assert.AreEqual(expectedStateCodeLastState, stateCodeLastState);
 
@@ -229,10 +229,10 @@ namespace CensusAnalyserTest
             string expectedStateCensusLastState = "West Bengal";
             int stateCensusRecords = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter, StateCensusFilePath);
             var stateCensusDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
-            string sortedStateCensusJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(stateCensusDictionary,"State",false);
+            string sortedStateCensusJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(stateCensusDictionary, "State", false);
             var jArray2 = JArray.Parse(sortedStateCensusJson);
             string stateCensusFirstState = jArray2[0]["Value"]["State"].Value<string>();
-            string stateCensusLastState = jArray2[jArray2.Count-1]["Value"]["State"].Value<string>();
+            string stateCensusLastState = jArray2[jArray2.Count - 1]["Value"]["State"].Value<string>();
             Assert.AreEqual(expectedStateCensusFirstState, stateCensusFirstState);
             Assert.AreEqual(expectedStateCensusLastState, stateCensusLastState);
         }
@@ -247,7 +247,7 @@ namespace CensusAnalyserTest
             string expectedLastState = "Sikkim";
             int records = new StateCensusAnalyser<CSVStateCensus>().ReadFile(CensusLoader<CSVStateCensus>.Country.INDIA, delimiter, StateCensusFilePath);
             var stateCensusDictionary = StateCensusAnalyser<CSVStateCensus>.dataDictionary;
-            string sortedJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(stateCensusDictionary,"Population",true);
+            string sortedJson = new StateCensusAnalyser<CSVStateCensus>().SortCSVStateCensus(stateCensusDictionary, "Population", true);
             var jsonArray = JArray.Parse(sortedJson);
             string firstState = jsonArray[0]["Value"]["State"].Value<string>();
             string lastState = jsonArray[jsonArray.Count - 1]["Value"]["State"].Value<string>();

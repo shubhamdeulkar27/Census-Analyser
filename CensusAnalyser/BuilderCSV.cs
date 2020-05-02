@@ -68,7 +68,7 @@ namespace CensusAnalyser
 			cSVStates.Name1 = values[2];
 			cSVStates.Tin1 = values[3];
 			cSVStates.StateCode1 = values[4];
-
+			
 			//Throw CSVException if Field is set to null.
 			if (cSVStates.SrNo1 == null || cSVStates.State1 == null || cSVStates.Name1 == null || cSVStates.Tin1 == null || cSVStates.StateCode1 == null)
 			{
@@ -80,7 +80,7 @@ namespace CensusAnalyser
 
 		public CSVUSCensus SetCSVUSCensus(string[] lineArray)
 		{
-			values = new string[] { "", "", "", "", "", "", "", "", "" };
+			values = new string[] { "", "", "0", "0", "0", "0", "0", "0", "0" };
 			try
 			{
 				values[0] = lineArray[0];
